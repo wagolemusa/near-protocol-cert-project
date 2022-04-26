@@ -110,4 +110,4 @@ cargo doc --no-deps --open
 
 # Authors
 
-- Wagole musa <wagolemusa@gmail.com> [@sudo_build](https://twitter.com/refugewize)
+- Wagole musa <wagolemusa@gmail.com> [@refugewize](https://twitter.com/refugewize)
