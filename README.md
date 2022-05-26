@@ -7,9 +7,7 @@ Event Booking in Rust
 
 ## Description
 
-This contract implements simple Event Booking application, users have to checkIn for the event by stacking same near.
-When a user checkIn and He did'not show up to the event, His near will not be returned to there wallet.
-
+This contract implements simple Event Booking application, event owner can create events and let users to checkIn for the event.
 
 ## To Run
 Open in the Gitpod link above or clone the repository.
