@@ -85,6 +85,13 @@ impl SmartEvent {
         env::log_str("Event was created succesfully");
     }
 
+    // Methods to display events
+    pub fn show_events(self){
+      let msg =  format!("{} {} {} {} {}", &self.title, &self.description, &self.started_date, &self.started_time, &self.user[]);
+    env::log_str(&msg);
+        
+    }
+
     // Public method to create users and save them in vectors
     pub fn check_in_user(&mut self, name: String, username: String,  email: String){
         let user1 = User{
@@ -95,6 +102,12 @@ impl SmartEvent {
         self.users.push(user1);
         env::log_str("User Created Succesfully");
     } 
+
+    // Method to display users
+    pub fn get_users(self)  {
+        let msg = format!("{} {} {} ", self.name, self.username, self.email);
+        env::log_str(&msg);
+    }
 }
 
 
