@@ -87,8 +87,9 @@ impl SmartEvent {
 
     // Methods to display events
     pub fn show_events(self){
-      let msg =  format!("{} {} {} {} {}", &self.title, &self.description, &self.started_date, &self.started_time, &self.user[]);
-    env::log_str(&msg);
+    //   let msg =  format!("{} {} {} {} {}", &self.title, &self.description, &self.started_date, &self.started_time, &self.user[]);
+    // env::log_str(&msg);
+        self.events;
         
     }
 
@@ -104,9 +105,8 @@ impl SmartEvent {
     } 
 
     // Method to display users
-    pub fn get_users(self)  {
-        let msg = format!("{} {} {} ", self.name, self.username, self.email);
-        env::log_str(&msg);
+    pub fn get_users(self){ 
+        self.users;
     }
 }
 
