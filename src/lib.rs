@@ -16,11 +16,9 @@ pub use std::fmt::format;
 #[serde(crate="near_sdk::serde")]
 pub struct Event {
     title: String,
-    description: String,
-    started_date: String,
     started_time: String,
     ended_time: String,
-    user: Vec<User>,
+    users: Vec<User>,
 
 }
 
@@ -69,28 +67,24 @@ impl SmartEvent {
     }
 
     // Public method to create events and save them in a vector
-    pub fn create_event(&mut self, title: String, description: String, 
-        started_date: String, started_time: String, 
+    pub fn create_event(&mut self, title: String,  
+        started_time: String, 
         ended_time: String)
     {
-        let event1 = Event{
+        let mut event1 = Event{
             title: title.to_string(),
-            description: description.to_string(),
-            started_date: started_date.to_string(),
             started_time: started_time.to_string(),
             ended_time: ended_time.to_string(),
-            user: vec![],
+            users: Vec::new(),
         };
+        event1.users.push(User{name: "musa".to_string(), username: "refuge".to_string(), email: "refuge@gmail.com".to_string()});
         self.events.push(event1);
         env::log_str("Event was created succesfully");
     }
 
     // Methods to display events
-    pub fn show_events(self){
-    //   let msg =  format!("{} {} {} {} {}", &self.title, &self.description, &self.started_date, &self.started_time, &self.user[]);
-    // env::log_str(&msg);
-        self.events;
-        
+    pub fn show_events(&mut self)-> &Vec<Event> {
+        &self.events
     }
 
     // Public method to create users and save them in vectors
@@ -105,11 +99,11 @@ impl SmartEvent {
     } 
 
     // Method to display users
-    pub fn get_users(self){ 
-        self.users;
+    pub fn get_users(&mut self) -> &Vec<User>{ 
+       &self.users 
+    
     }
-}
-
+} 
 
 // use the attribute below for unit tests
 #[cfg(test)]
@@ -130,7 +124,7 @@ mod tests {
         let _context = get_context(username.clone());
 
         let mut contract = SmartEvent::new_event();
-        contract.create_event("BlockChain event".to_string(), "Come and lean Smart contract".to_string(), "20/6/2022".to_string(), "10:30 pm".to_string(), "12:30 pm".to_string());
+        contract.create_event("BlockChain event".to_string(),  "10:30 pm".to_string(), "12:30 pm".to_string());
         assert_eq!(contract.count_events(), 1);
 
     }
@@ -144,6 +138,19 @@ mod tests {
         contract.check_in_user("refuge".to_string(), "homie".to_string(), "refuge@gmail.com".to_string());
        let results = contract.count_users();
         assert_eq!(results, 1);
+    }   
+
+    #[test]
+    fn get_users(){
+        let username = AccountId::new_unchecked("djrefuge.testnet".to_string());
+        let _context = get_context(username.clone());
+        let mut contract = SmartEvent::new_event();
+        contract.check_in_user("refuge".to_string(), "homie".to_string(), "refuge@gmail.com".to_string());
+        contract.check_in_user("musa".to_string(), "wagole".to_string(), "wagole@gmail.com".to_string());
+        
+        let count = contract.get_users();
+        assert_eq!(count.len(), 2);
+
     }
 
 
